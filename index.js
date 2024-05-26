@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoute from "./routes/user.route.js";
 import cors from "cors"
+import cookieParser from "cookie-parser";
+
+import messageRoute from "./routes/message.route.js";
+//import { app, server } from "./SocketIO/server.js";
 
 const app = express();
 
@@ -10,6 +14,7 @@ dotenv.config();
 
 //middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
@@ -24,7 +29,8 @@ catch(error){
 }
 
 //routes
-app.use("/user",userRoute);
+app.use("/api/user",userRoute);
+app.use("/api/message", messageRoute);
 
 app.listen(PORT, () =>  {
   console.log(`Server is running on port ${PORT}`)
