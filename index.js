@@ -4,11 +4,11 @@ import mongoose from "mongoose";
 import userRoute from "./routes/user.route.js";
 import cors from "cors"
 import cookieParser from "cookie-parser";
-
+import { app, server } from "./SocketIO/server.js";
 import messageRoute from "./routes/message.route.js";
-//import { app, server } from "./SocketIO/server.js";
 
-const app = express();
+
+// const app = express();
 
 dotenv.config();
 
@@ -32,6 +32,6 @@ catch(error){
 app.use("/api/user",userRoute);
 app.use("/api/message", messageRoute);
 
-app.listen(PORT, () =>  {
+server.listen(PORT, () =>  {
   console.log(`Server is running on port ${PORT}`)
 });
